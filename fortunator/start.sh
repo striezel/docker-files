@@ -19,4 +19,4 @@ then
   fi
 fi
 
-docker run --rm fortunator
+docker run --rm "$IMAGE"
