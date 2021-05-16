@@ -1,0 +1,26 @@
+FROM debian:10-slim
+LABEL maintainer="Dirk Stolle <striezel-dev@web.de>"
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install --no-install-recommends -y \
+        apt-transport-https \
+        wget \
+        gnupg2 \
+        dirmngr \
+        ca-certificates \
+        bash git nano && \ 
+    apt-key adv --fetch-keys https://deb.nodesource.com/gpgkey/nodesource.gpg.key && \
+    apt-get clean && \
+    echo "# Always use package from nodesource.com for Node.js" > /etc/apt/preferences.d/node.pref && \
+    echo "Package: nodejs" >> /etc/apt/preferences.d/node.pref && \
+    echo "Pin: origin deb.nodesource.com" >> /etc/apt/preferences.d/node.pref && \
+    echo "Pin-Priority: 1000" >> /etc/apt/preferences.d/node.pref
+# Node.js version can be passed during build.
+# Valid versions must be of the form "10.x", "12.x", "14.x", etc.;
+# Specifying a version like "10.1.0" is not supported.
+ARG NODE_VERSION=10.x
+RUN echo "# Node.js $NODE_VERSION for Debian 10 (codename buster)" > /etc/apt/sources.list.d/nodejs.list \
+  && echo "deb https://deb.nodesource.com/node_${NODE_VERSION} buster main" >> /etc/apt/sources.list.d/nodejs.list \
+  && echo "deb-src https://deb.nodesource.com/node_${NODE_VERSION} buster main" >> /etc/apt/sources.list.d/nodejs.list \
+  && apt-get update && apt-get install --no-install-recommends -y nodejs bzip2 \
+  && apt-get clean
+CMD nodejs --version
