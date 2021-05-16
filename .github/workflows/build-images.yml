@@ -1,0 +1,20 @@
+name: Build all Dockerfiles
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      # Checks-out the repository under $GITHUB_WORKSPACE.
+      - uses: actions/checkout@v2
+      - name: Build Dockerfiles
+        run: |
+          LOCATION=$(pwd)
+          DOCKERFILES=$(find . -type f -name 'Dockerfile' | sort)
+          for f in $DOCKERFILES
+          do
+            cd "$(dirname "$f")"
+            docker build . || exit 1
+            cd "$LOCATION"
+          done
