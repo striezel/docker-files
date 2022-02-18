@@ -1,4 +1,4 @@
-FROM debian:10-slim
+FROM debian:11-slim
 LABEL maintainer="Dirk Stolle <striezel-dev@web.de>"
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install --no-install-recommends -y \
@@ -16,11 +16,12 @@ RUN apt-get update && apt-get upgrade -y && \
     echo "Pin-Priority: 1000" >> /etc/apt/preferences.d/node.pref
 # Node.js version can be passed during build.
 # Valid versions must be of the form "10.x", "12.x", "14.x", etc.;
-# Specifying a version like "10.1.0" is not supported.
-ARG NODE_VERSION=10.x
-RUN echo "# Node.js $NODE_VERSION for Debian 10 (codename buster)" > /etc/apt/sources.list.d/nodejs.list \
-  && echo "deb https://deb.nodesource.com/node_${NODE_VERSION} buster main" >> /etc/apt/sources.list.d/nodejs.list \
-  && echo "deb-src https://deb.nodesource.com/node_${NODE_VERSION} buster main" >> /etc/apt/sources.list.d/nodejs.list \
+# Specifying a version like "12.22.1" is not supported.
+ARG NODE_VERSION=12.x
+RUN echo "# Node.js $NODE_VERSION for Debian 11 (codename bullseye)" > /etc/apt/sources.list.d/nodejs.list \
+  && echo "deb https://deb.nodesource.com/node_${NODE_VERSION} bullseye main" >> /etc/apt/sources.list.d/nodejs.list \
+  && echo "deb-src https://deb.nodesource.com/node_${NODE_VERSION} bullseye main" >> /etc/apt/sources.list.d/nodejs.list \
   && apt-get update && apt-get install --no-install-recommends -y nodejs bzip2 \
   && apt-get clean
-CMD nodejs --version
+CMD node --version
+EXPOSE 3000
