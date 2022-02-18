@@ -1,10 +1,10 @@
-FROM debian:10-slim
+FROM debian:11-slim
 RUN apt-get update && \
     apt-get install -y bash git gcc libsqlite3-dev libssl-dev pkg-config \
                        nano mc wget && \
     wget -O /tmp/ru.sh https://sh.rustup.rs && \
     chmod u+x /tmp/ru.sh && \
-    /tmp/ru.sh -y --profile minimal --default-toolchain 1.40
+    /tmp/ru.sh -y --profile minimal --default-toolchain 1.48
 RUN export PATH="$HOME/.cargo/bin:$PATH"
 RUN git clone https://github.com/striezel/corona.git /opt/corona
 WORKDIR /opt/corona
