@@ -1,4 +1,4 @@
-FROM debian:10-slim
+FROM debian:11-slim
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y cowsay fortunes fortune-mod
 CMD /usr/games/fortune | /usr/games/cowsay
