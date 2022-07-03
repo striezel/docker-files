@@ -18,3 +18,17 @@ jobs:
             docker build . || exit 1
             cd "$LOCATION"
           done
+
+  node_scripts:
+    runs-on: ubuntu-20.04
+    steps:
+      # Checks-out the repository under $GITHUB_WORKSPACE.
+      - uses: actions/checkout@v3
+      - name: Build Dockerfiles
+        run: |
+          cd "$GITHUB_WORKSPACE/node"
+          SH_FILES=$(find . -type f -name 'build_node*.sh' | sort --version-sort)
+          for f in $SH_FILES
+          do
+            "$f" || exit 1
+          done
