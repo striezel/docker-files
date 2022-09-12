@@ -1,0 +1,19 @@
+FROM debian:bookworm-slim
+RUN apt-get update && \
+    apt-get install -y bash git gcc libsqlite3-dev libssl-dev pkg-config \
+                       php-cli php-dev libclang-dev \
+                       nano mc wget && \
+    apt-get clean
+# create user for rustc usage
+RUN useradd --create-home rust-user
+USER rust-user
+WORKDIR /home/rust-user
+RUN wget -O /tmp/ru.sh https://sh.rustup.rs && \
+    chmod u+x /tmp/ru.sh && \
+    /tmp/ru.sh -y --profile minimal --default-toolchain 1.63 && \
+    /home/rust-user/.cargo/bin/rustup component add clippy
+RUN export PATH="$HOME/.cargo/bin:$PATH"
+RUN git clone https://github.com/davidcole1340/ext-php-rs.git
+WORKDIR /home/rust-user/ext-php-rs
+RUN /home/rust-user/.cargo/bin/cargo fetch
+CMD sleep 86400
