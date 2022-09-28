@@ -1,3 +1,7 @@
+# Copyright (C) 2019, 2021, 2022  Dirk Stolle
+#
+# SPDX-License-Identifier: LGPL-3.0-or-later
+
 FROM debian:11-slim
 # install basics
 RUN apt-get update && apt-get upgrade -y && \
