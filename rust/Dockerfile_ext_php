@@ -10,8 +10,9 @@ USER rust-user
 WORKDIR /home/rust-user
 RUN wget -O /tmp/ru.sh https://sh.rustup.rs && \
     chmod u+x /tmp/ru.sh && \
-    /tmp/ru.sh -y --profile minimal --default-toolchain 1.63 && \
-    /home/rust-user/.cargo/bin/rustup component add clippy
+    /tmp/ru.sh -y --profile minimal --default-toolchain stable && \
+    /home/rust-user/.cargo/bin/rustup component add clippy && \
+    /home/rust-user/.cargo/bin/rustup toolchain install nightly
 RUN export PATH="$HOME/.cargo/bin:$PATH"
 RUN git clone https://github.com/davidcole1340/ext-php-rs.git
 WORKDIR /home/rust-user/ext-php-rs
