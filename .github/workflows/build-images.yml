@@ -4,7 +4,7 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
       - uses: actions/checkout@v3
@@ -20,7 +20,7 @@ jobs:
           done
 
   node_scripts:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
       - uses: actions/checkout@v3
@@ -31,4 +31,18 @@ jobs:
           for f in $SH_FILES
           do
             "$f" || exit 1
+          done
+
+  rust:
+    runs-on: ubuntu-22.04
+    steps:
+      # Checks-out the repository under $GITHUB_WORKSPACE.
+      - uses: actions/checkout@v3
+      - name: Build Dockerfiles
+        run: |
+          cd "$GITHUB_WORKSPACE/rust"
+          DOCKERFILES=$(find . -type f -name 'Dockerfile_*' | sort)
+          for f in $DOCKERFILES
+          do
+            docker build . -f "$f" || exit 1
           done
