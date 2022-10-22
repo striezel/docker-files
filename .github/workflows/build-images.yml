@@ -46,3 +46,17 @@ jobs:
           do
             docker build . -f "$f" || exit 1
           done
+
+  mariadb:
+    runs-on: ubuntu-22.04
+    steps:
+      # Checks-out the repository under $GITHUB_WORKSPACE.
+      - uses: actions/checkout@v3
+      - name: Build Dockerfiles
+        run: |
+          cd "$GITHUB_WORKSPACE/mariadb"
+          DOCKERFILES=$(find . -type f -name 'Dockerfile_*' | sort --version-sort)
+          for f in $DOCKERFILES
+          do
+            docker build . -f "$f" || exit 1
+          done
