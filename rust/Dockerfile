@@ -1,4 +1,4 @@
-# Copyright (C) 2021, 2022  Dirk Stolle
+# Copyright (C) 2021, 2022, 2023  Dirk Stolle
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
@@ -8,7 +8,7 @@ RUN apt-get update && \
                        nano mc wget && apt-get clean && \
     wget -O /tmp/ru.sh https://sh.rustup.rs && \
     chmod u+x /tmp/ru.sh
-RUN /tmp/ru.sh -y --profile minimal --default-toolchain 1.48
+RUN /tmp/ru.sh -y --profile minimal --default-toolchain 1.56.1
 RUN export PATH="$HOME/.cargo/bin:$PATH"
 RUN git clone https://github.com/striezel/corona.git /opt/corona
 WORKDIR /opt/corona
