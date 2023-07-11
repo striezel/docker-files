@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-FROM debian:11-slim
+FROM debian:12-slim
 RUN apt-get update && \
     apt-get install -y bash git gcc libsqlite3-dev libssl-dev pkg-config \
                        nano mc wget && apt-get clean && \
