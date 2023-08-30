@@ -8,7 +8,9 @@ RUN apt-get update && \
                        nano mc wget && apt-get clean && \
     wget -O /tmp/ru.sh https://sh.rustup.rs && \
     chmod u+x /tmp/ru.sh
-RUN /tmp/ru.sh -y --profile minimal --default-toolchain 1.63.0
+RUN /tmp/ru.sh -y --profile minimal --default-toolchain 1.63.0 && \
+    $HOME/.cargo/bin/rustup component add clippy && \
+    $HOME/.cargo/bin/rustup component add rustfmt
 RUN export PATH="$HOME/.cargo/bin:$PATH"
 RUN git clone https://github.com/striezel/corona.git /opt/corona
 WORKDIR /opt/corona
