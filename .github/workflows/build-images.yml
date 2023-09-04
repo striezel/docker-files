@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build Dockerfiles
         run: |
           LOCATION=$(pwd)
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build Dockerfiles
         run: |
           cd "$GITHUB_WORKSPACE/node"
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build Dockerfiles
         run: |
           cd "$GITHUB_WORKSPACE/rust"
