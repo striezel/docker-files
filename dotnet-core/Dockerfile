@@ -1,16 +1,17 @@
-# Copyright (C) 2019, 2021, 2022  Dirk Stolle
+# Copyright (C) 2019, 2021, 2022, 2024  Dirk Stolle
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-FROM debian:11-slim
+FROM debian:12-slim
 # install basics
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y apt-transport-https wget gpg ca-certificates
 # get Microsoft certificate
 RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg && \
-    mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+    mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/ && \
+    ln -s /etc/apt/trusted.gpg.d/microsoft.asc.gpg /usr/share/keyrings/microsoft-prod.gpg
 # add APT list for .NET core
-RUN wget -q https://packages.microsoft.com/config/debian/11/prod.list && \
+RUN wget -q https://packages.microsoft.com/config/debian/12/prod.list && \
     mv prod.list /etc/apt/sources.list.d/microsoft-prod.list && \
     chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg && \
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list
