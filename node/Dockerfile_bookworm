@@ -1,0 +1,31 @@
+# Copyright (C) 2021, 2022, 2024  Dirk Stolle
+#
+# SPDX-License-Identifier: LGPL-3.0-or-later
+
+FROM debian:12-slim
+LABEL maintainer="Dirk Stolle <striezel-dev@web.de>"
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install --no-install-recommends -y \
+        apt-transport-https \
+        wget \
+        gnupg2 \
+        dirmngr \
+        ca-certificates \
+        bash git nano && \
+    apt-key adv --fetch-keys https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key && \
+    apt-get clean && \
+    echo "# Always use package from nodesource.com for Node.js" > /etc/apt/preferences.d/node.pref && \
+    echo "Package: nodejs" >> /etc/apt/preferences.d/node.pref && \
+    echo "Pin: origin deb.nodesource.com" >> /etc/apt/preferences.d/node.pref && \
+    echo "Pin-Priority: 1000" >> /etc/apt/preferences.d/node.pref
+# Node.js version can be passed during build.
+# Valid versions must be of the form "18.x", "20.x", "22.x", etc.;
+# Specifying a version like "18.20.4" is not supported.
+ARG NODE_VERSION=18.x
+RUN echo "# Node.js $NODE_VERSION for Debian 12" > /etc/apt/sources.list.d/nodejs.list \
+  && echo "deb https://deb.nodesource.com/node_${NODE_VERSION} nodistro main" >> /etc/apt/sources.list.d/nodejs.list \
+  && echo "deb-src https://deb.nodesource.com/node_${NODE_VERSION} nodistro main" >> /etc/apt/sources.list.d/nodejs.list \
+  && apt-get update && apt-get install --no-install-recommends -y nodejs bzip2 \
+  && apt-get clean
+CMD node --version
+EXPOSE 3000
