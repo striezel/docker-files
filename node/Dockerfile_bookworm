@@ -21,7 +21,7 @@ RUN apt-get update && apt-get upgrade -y && \
 # Node.js version can be passed during build.
 # Valid versions must be of the form "18.x", "20.x", "22.x", etc.;
 # Specifying a version like "18.20.4" is not supported.
-ARG NODE_VERSION=18.x
+ARG NODE_VERSION=22.x
 RUN echo "# Node.js $NODE_VERSION for Debian 12" > /etc/apt/sources.list.d/nodejs.list \
   && echo "deb https://deb.nodesource.com/node_${NODE_VERSION} nodistro main" >> /etc/apt/sources.list.d/nodejs.list \
   && echo "deb-src https://deb.nodesource.com/node_${NODE_VERSION} nodistro main" >> /etc/apt/sources.list.d/nodejs.list \
