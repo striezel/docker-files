@@ -1,4 +1,4 @@
-# .NET Core SDK
+# .NET SDK
 
 The Dockerfile in this directory build an image based on Debian 12 and installs
 the .NET SDK 8 from the official Mircrosoft package sources. Furthermore, a
