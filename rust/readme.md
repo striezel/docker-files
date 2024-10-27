@@ -11,3 +11,5 @@ images. Those are mainly intended for personal use.
   the repository from <https://github.com/striezel/corona>
 * `Dockerfile_stable` - builds image with current stable version of Rust and
   the repository from <https://github.com/striezel/corona>
+
+All of those use Debian 12 as base image.
