@@ -6,4 +6,4 @@ then
   exit 1
 fi
 
-youtube-dl --restrict-filenames -o '%(title).50s-%(id)s.%(ext)s' "$1"
+yt-dlp --restrict-filenames -o '%(title).50s-%(id)s.%(ext)s' "$1"
