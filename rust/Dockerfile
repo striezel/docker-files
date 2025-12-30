@@ -1,14 +1,14 @@
-# Copyright (C) 2021, 2022, 2023  Dirk Stolle
+# Copyright (C) 2021, 2022, 2023, 2025  Dirk Stolle
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-FROM debian:12-slim
+FROM debian:13-slim
 RUN apt-get update && \
     apt-get install -y bash git gcc libsqlite3-dev libssl-dev pkg-config \
                        nano mc wget && apt-get clean && \
     wget -O /tmp/ru.sh https://sh.rustup.rs && \
     chmod u+x /tmp/ru.sh
-RUN /tmp/ru.sh -y --profile minimal --default-toolchain 1.63.0 && \
+RUN /tmp/ru.sh -y --profile minimal --default-toolchain 1.75.0 && \
     $HOME/.cargo/bin/rustup component add clippy && \
     $HOME/.cargo/bin/rustup component add rustfmt
 RUN export PATH="$HOME/.cargo/bin:$PATH"
