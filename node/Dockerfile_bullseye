@@ -1,4 +1,4 @@
-# Copyright (C) 2021, 2022  Dirk Stolle
+# Copyright (C) 2021, 2022, 2026  Dirk Stolle
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
         dirmngr \
         ca-certificates \
         bash git nano && \
-    apt-key adv --fetch-keys https://deb.nodesource.com/gpgkey/nodesource.gpg.key && \
+    apt-key adv --fetch-keys 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x9fd3b784bc1c6fc31a8a0a1c1655a0ab68576280' && \
     apt-get clean && \
     echo "# Always use package from nodesource.com for Node.js" > /etc/apt/preferences.d/node.pref && \
     echo "Package: nodejs" >> /etc/apt/preferences.d/node.pref && \
