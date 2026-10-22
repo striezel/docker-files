@@ -14,7 +14,7 @@ RUN apt-get update
 # opt out of .NET telemetry
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 # install .NET SDK
-RUN apt-get install -y dotnet-sdk-8.0
+RUN apt-get install -y dotnet-sdk-10.0
 # install Git and some other helpful tools
 RUN apt-get install -y --no-install-recommends git mc nano vim
 # create user for .NET usage
