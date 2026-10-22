@@ -4,7 +4,7 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
       - name: Checkout
@@ -23,7 +23,7 @@ jobs:
           done
 
   node_scripts:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
       - name: Checkout
@@ -40,7 +40,7 @@ jobs:
           done
 
   rust:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE.
       - name: Checkout
